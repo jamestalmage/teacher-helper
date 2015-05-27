@@ -51,7 +51,8 @@ function makeTasks(var_entries, outputDir){
       var bundler = browserify(config({
         entries: entries,
         debug: true,
-        minify: minify
+        minify: minify,
+        annotate:true
       }));
 
       var bundle = function() {

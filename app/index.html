@@ -11,7 +11,7 @@
 </style>
 <body ng-controller="PercentageController as percentage">
 
-<input type="number" ng-model="percentage.correct"> /
+<input type="number" ng-model="percentage.correct" debounce-selection> /
 <input type="number" ng-model="percentage.outOf">
 = {{percentage.calculate(percentage.correct, percentage.outOf, 0)}}%
 <br>
@@ -29,8 +29,10 @@
     <td style="text-align: right; padding-right: 10px; font-weight: bold">{{$index}}</td>
     <td style="text-align: right; padding-left: 10px; padding-right: 10px; font-weight: bold">{{score}}%</td>
     <td style="font-size: smaller; font-weight:lighter; color: #777777; text-align: right; padding-left: 10px; padding-right: 10px"
-        ng-if="percentage.showHalfColumn && !$last">
-      {{percentage.calculate($index + 0.5, percentage.outOf, 0)}}%
+      ng-if="percentage.showHalfColumn">
+      <span ng-if="!$last">
+        {{percentage.calculate($index + 0.5, percentage.outOf, 0)}}%
+      </span>
     </td>
   </tr>
 </table>
@@ -40,11 +42,11 @@ This will create a table showing percentages for every score.
 If you give partial credit for effort, you may want to check the "0.5 step increments" checkbox.
 
 You can type the number of correct answers for a particular student in the left text box, and that
-score will be shown (useful for tests with so many questions the chart will not fit on the page)
+score will be shown (useful for tests with many questions).
 
 
 
 
-<script src="/dist/js/0.0.1.teacher-helper.js"></script>
+<script src="dist/js/0.0.1.teacher-helper.js"></script>
 </body>
 </html>
